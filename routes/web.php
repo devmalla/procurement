@@ -12,14 +12,16 @@
 */
 // Homepage
 Route::get('/', 'HomepageController@index')->name('homepage');
+// Register Routes
+Route::get('/register', 'RegistrationController@getRegister')->name('register');
+Route::post('/register', 'RegistrationController@postRegister')->name('register');
+// Login Routes
+Route::post('/', 'LoginController@postLogin')->name('login');
+// Logout Route
+Route::get('/logout', 'LoginController@logout')->name('logout');
 
-//// Register Routes
-//Route::get('/register', 'RegistrationController@getRegister')->name('register');
-//Route::post('/register', 'RegistrationController@postRegister')->name('register');
-//// Login Routes
-//Route::get('/organizer/login', 'LoginController@getOrganizerLogin')->name('organizer.login');
-//Route::post('/organizer/login', 'LoginController@postLogin')->name('login');
-//Route::get('/user/login', 'LoginController@getUserLogin')->name('user.login');
-//Route::post('/user/login', 'LoginController@postLogin')->name('login');
-//// Logout Route
-//Route::get('/logout', 'LoginController@logout')->name('logout');
+// Super Admin Routes
+Route::get('/superadmin', 'SuperAdminController@index')->name('superadmin');
+
+
+

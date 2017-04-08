@@ -7,15 +7,12 @@ use Sentinel;
 
 class LoginController extends Controller
 {
-    public function getOrganizerLogin(){
-        return view('authentication.login');
-    }
     public function postLogin(Request $request){
         if (Sentinel::Authenticate($request->all())){
-            return redirect('/');
+            return redirect(route('superadmin'));
         }else{
             $errors = 'Incorrect username or Password.';
-            return redirect('organizer/login')->with('errors', $errors);
+            return redirect('/')->with('errors', $errors);
         }
     }
 

@@ -11,10 +11,10 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="">
+                    <a href="{{ route('logout') }}">
                         Log out
                     </a>
-                    {{--{{ route('logout') }}--}}
+
                 </li>
             </ul>
         </div>
