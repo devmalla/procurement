@@ -9,7 +9,18 @@ class LoginController extends Controller
 {
     public function postLogin(Request $request){
         if (Sentinel::Authenticate($request->all())){
-            return redirect(route('superadmin'));
+            if(Sentinel::getUser()->roles->first()->slug == 'admin'){
+                return redirect(route('admin.dashboard'));
+            }elseif (Sentinel::getUser()->roles->first()->slug == 'creator'){
+                return redirect(route('creator.dashboard'));
+            }elseif (Sentinel::getUser()->roles->first()->slug == 'approver'){
+                return redirect(route('approver.dashboard'));
+            }elseif (Sentinel::getUser()->roles->first()->slug == 'reviewer'){
+                return redirect(route('reviewer.dashboard'));
+            }elseif (Sentinel::getUser()->roles->first()->slug == 'bidder'){
+                return redirect(route('bidder.dashboard'));
+            }
+
         }else{
             $errors = 'Incorrect username or Password.';
             return redirect('/')->with('errors', $errors);

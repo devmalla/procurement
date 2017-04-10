@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Homepage')
 @section('sidebar')
-    @include('layouts.sidebar')
+    @include('bidder.sidebar')
 @endsection
 @section('navigation')
     @include('layouts.navigation')
@@ -12,11 +12,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="header">
-                            header
-                        </div>
                         <div class="content">
-                            content
+                            Bidder Dashboard
                         </div>
                     </div>
                 </div>

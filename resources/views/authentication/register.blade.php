@@ -64,7 +64,6 @@
                     <div class="form-group">
                         <input type="submit" value="Register" class="btn btn-success pull-right">
                     </div>
-
                 </form>
             </div>
         </div>
