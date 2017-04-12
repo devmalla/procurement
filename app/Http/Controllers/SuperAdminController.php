@@ -22,16 +22,27 @@ class SuperAdminController extends Controller
     public function postAddOrganization(Request $request){
        $this->validate($request,  [
            'name'   =>  'required',
-           'email'   =>  'required',
-           'address'   =>  'required',
        ]);
 
         $organization = new Organization;
+        $user_id = Sentinel::getUser()->id;
+        $organization->user_id = $user_id;
         $organization->name = $request->name;
+        $organization->acronym = $request->acronym;
         $organization->email = $request->email;
-        $organization->address = $request->address;
+        $organization->description = $request->description;
+        $organization->office_category = $request->office_category;
+        $organization->website = $request->website;
+        $organization->address_one = $request->address_one;
+        $organization->address_two = $request->address_two;
+        $organization->address_three = $request->address_three;
+        $organization->city = $request->city;
+        $organization->district = $request->district;
+        $organization->municipality = $request->municipality;
+        $organization->vdc = $request->vdc;
+        $organization->contact_one = $request->contact_one;
+        $organization->contact_two = $request->contact_two;
         $organization->save();
-        $message = 'Organization successfully added';
         return redirect('admin/view/organization');
     }
 
@@ -53,6 +64,9 @@ class SuperAdminController extends Controller
             'email' => 'required|unique:users|max:255',
             'password' => 'required',
             'role' => 'required',
+            'designation' => 'required',
+            'officer_class' => 'required',
+            'contact_one' => 'required',
         ]);
         $user =  Sentinel::registerAndActivate($request->all());
         if($request->role == 'creator'){
@@ -72,7 +86,8 @@ class SuperAdminController extends Controller
     }
 
     public function getViewUser(){
-        $users = User::all();
+        $user_id =  Sentinel::getUser()->id;
+        $users = User::where('admin_id', $user_id)->get();
         return view('superadmin.view-user')->with('users', $users);
     }
 

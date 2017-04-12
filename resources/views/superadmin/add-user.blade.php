@@ -24,6 +24,7 @@
                         <div class="content">
                             <form method="post" action="{{ route('admin.add.user') }}">
                                 {{ csrf_field() }}
+                                <input type="hidden" class="form-control" name="admin_id" value="{{ Sentinel::getUser()->id }}">
                                 <div class="form-group">
                                     <label for="first_name">
                                         First Name
@@ -60,8 +61,35 @@
                                         <option value="creator">Creator</option>
                                         <option value="reviewer">Reviewer</option>
                                         <option value="approver">Approver</option>
-                                        <option value="bidder">Bidder</option>
                                     </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="designation">
+                                        Designation
+                                    </label>
+                                    <input type="text" class="form-control" name="designation" placeholder="Designation">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="officer_class">
+                                        Officer class
+                                    </label>
+                                    <input type="text" class="form-control" name="officer_class" placeholder="Office Class">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="contact-one">
+                                        Contact one
+                                    </label>
+                                    <input type="text" class="form-control" name="contact_one" placeholder="Contact One">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="contact-two">
+                                        Contact two
+                                    </label>
+                                    <input type="text" class="form-control" name="contact_two" placeholder="Contact Two">
                                 </div>
 
                                 <button class="btn btn-info btn-fill" type="submit">Add User</button>

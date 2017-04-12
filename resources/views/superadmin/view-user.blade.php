@@ -25,7 +25,10 @@
                                     <th>Firstname</th>
                                     <th>Lastname</th>
                                     <th>Email</th>
-                                    <th>Role</th>
+                                    <th>Designation</th>
+                                    <th>Officer Class</th>
+                                    <th>Contact</th>
+                                    <th>roles</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -34,6 +37,9 @@
                                         <td>{{ $user->first_name }}</td>
                                         <td>{{ $user->last_name }}</td>
                                         <td>{{ $user->email }}</td>
+                                        <td>{{ $user->designation }}</td>
+                                        <td>{{ $user->officer_class }}</td>
+                                        <td>{{ $user->contact }}</td>
                                         <td>{{ $user->roles->first()->slug }}</td>
                                     </tr>
                                 @endforeach

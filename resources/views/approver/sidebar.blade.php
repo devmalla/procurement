@@ -13,6 +13,20 @@
                     <p>Dashboard</p>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('approver.view.mpp') }}">
+                    <i class="pe-7s-graph"></i>
+                    <p>View MPP</p>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('approver.view.app') }}">
+                    <i class="pe-7s-graph"></i>
+                    <p>View APP</p>
+                </a>
+            </li>
+
         </ul>
     </div>
 </div>

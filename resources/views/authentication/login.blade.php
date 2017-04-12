@@ -10,7 +10,7 @@
         <div class="panel-body">
         <form class="login-form" method="POST" action="{{ route('login') }}">
             {{ csrf_field() }}
-            <input type="text" name="email" placeholder="name"/>
+            <input type="text" name="email" placeholder="email"/>
             <input type="password" name="password" placeholder="password"/>
             <button type="submit">login</button>
             <p class="message">Not Register? <a href="{{ route('register') }}">Create an Account</a></p>

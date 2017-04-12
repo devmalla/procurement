@@ -8,9 +8,33 @@
         </div>
         <ul class="nav">
             <li>
-                <a href="{{ route('admin.dashboard') }}">
+                <a href="{{ route('creator.dashboard') }}">
                     <i class="pe-7s-graph"></i>
                     <p>Dashboard</p>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('creator.add.mpp') }}">
+                    <i class="pe-7s-graph"></i>
+                    <p>Add MPP</p>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('creator.view.mpp') }}">
+                    <i class="pe-7s-graph"></i>
+                    <p>View MPP</p>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('creator.add.app') }}">
+                    <i class="pe-7s-graph"></i>
+                    <p>Add APP</p>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('creator.view.app') }}">
+                    <i class="pe-7s-graph"></i>
+                    <p>View APP</p>
                 </a>
             </li>
         </ul>

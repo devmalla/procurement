@@ -22,9 +22,9 @@ class RegistrationController extends Controller
             'last_name' => 'required',
             'password' => 'required|confirmed',
         ]);
-
-        $user = $request->all();
-        Sentinel::registerAndActivate($user);
+        $user = Sentinel::registerAndActivate($request->all());
+        $role = Sentinel::findRoleBySlug('admin');
+        $role->users()->attach($user);
         return redirect('/');
     }
 }

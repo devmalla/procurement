@@ -95,12 +95,18 @@ class MigrationCartalystSentinel extends Migration
 
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email');
-            $table->string('password');
-            $table->text('permissions')->nullable();
-            $table->timestamp('last_login')->nullable();
+            $table->integer('admin_id')->unsigned();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
+            $table->string('email');
+            $table->string('password');
+            $table->string('designation')->nullable();
+            $table->string('officer_class')->nullable();
+            $table->integer('contact_one')->nullable();
+            $table->integer('contact_two')->nullable();
+
+            $table->text('permissions')->nullable();
+            $table->timestamp('last_login')->nullable();
             $table->timestamps();
 
             $table->engine = 'InnoDB';
@@ -109,9 +115,60 @@ class MigrationCartalystSentinel extends Migration
 
         Schema::create('organizations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email');
-            $table->string('address');
+            $table->integer('user_id')->unsigned();
+            $table->string('name')->nullable();
+            $table->string('acronym')->nullable();
+            $table->string('description')->nullable();
+            $table->string('office_category')->nullable();
+            $table->string('website')->nullable();
+            $table->string('email')->nullable();
+            $table->string('address_one')->nullable();
+            $table->string('address_two')->nullable();
+            $table->string('address_three')->nullable();
+            $table->string('city')->nullable();
+            $table->string('district')->nullable();
+            $table->string('municipality')->nullable();
+            $table->string('vdc')->nullable();
+            $table->unsignedInteger('contact_one')->nullable();
+            $table->unsignedInteger('contact_two')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('mpps', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->string('name')->nullable();
+            $table->string('project_name')->nullable();
+            $table->integer('fiscal_year')->nullable();
+            $table->integer('budget_sub_head_no')->nullable();
+            $table->string('procurement_description')->nullable();
+            $table->string('procurement_category')->nullable();
+            $table->string('contract_type')->nullable();
+            $table->integer('duration')->nullable();
+            $table->integer('status')->default(0)->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('apps', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('fiscal_year')->nullable();
+            $table->string('procurement_description')->nullable();
+            $table->string('procurement_category')->nullable();
+            $table->string('contract_type')->nullable();
+            $table->integer('estimated_cost')->nullable();
+            $table->date('date_for_tender')->nullable();
+            $table->date('date_of_agreement')->nullable();
+            $table->date('bid_invitation_date')->nullable();
+            $table->date('date_of_consent')->nullable();
+            $table->date('bid_opening_date')->nullable();
+            $table->date('bid_evalutaion_completion_date')->nullable();
+            $table->date('date_of_approval')->nullable();
+            $table->date('loi_issue_date')->nullable();
+            $table->date('contract_signing_date')->nullable();
+            $table->date('work_initiation_date')->nullable();
+            $table->date('work_completion_date')->nullable();
+            $table->integer('status')->default(0)->nullable();
             $table->timestamps();
         });
 
@@ -132,5 +189,7 @@ class MigrationCartalystSentinel extends Migration
         Schema::drop('throttle');
         Schema::drop('users');
         Schema::drop('organizations');
+        Schema::drop('mpps');
+        Schema::drop('apps');
     }
 }

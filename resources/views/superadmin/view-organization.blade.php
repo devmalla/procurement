@@ -22,17 +22,25 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Firstname</th>
-                                    <th>Lastname</th>
+                                    <th>Name</th>
+                                    <th>Acronym</th>
                                     <th>Email</th>
+                                    <th>Description</th>
+                                    <th>Office Category</th>
+                                    <th>Website</th>
+                                    <th>Adress One</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($organizations as $organization)
                                     <tr>
                                         <td>{{ $organization->name }}</td>
+                                        <td>{{ $organization->acronym }}</td>
                                         <td>{{ $organization->email }}</td>
-                                        <td>{{ $organization->address }}</td>
+                                        <td>{{ $organization->description }}</td>
+                                        <td>{{ $organization->office_category }}</td>
+                                        <td>{{ $organization->website }}</td>
+                                        <td>{{ $organization->address_one }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

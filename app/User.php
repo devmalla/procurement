@@ -16,10 +16,19 @@ class User extends EloquentUser
      */
     protected $fillable = [
         'email',
+        'admin_id',
         'first_name',
         'last_name',
         'password',
+        'designation',
+        'officer_class',
+        'contact_one',
+        'contact_two',
     ];
+
+    public function organization(){
+        return $this->hasMany('App\Organization');
+    }
 
     /**
      * The attributes that should be hidden for arrays.

@@ -11,4 +11,8 @@ class Organization extends Model
         'email',
         'address',
     ];
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }
