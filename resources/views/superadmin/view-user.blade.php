@@ -39,7 +39,7 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->designation }}</td>
                                         <td>{{ $user->officer_class }}</td>
-                                        <td>{{ $user->contact }}</td>
+                                        <td>{{ $user->contact_one }}</td>
                                         <td>{{ $user->roles->first()->slug }}</td>
                                     </tr>
                                 @endforeach
