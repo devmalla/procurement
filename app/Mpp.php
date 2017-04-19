@@ -21,4 +21,8 @@ class Mpp extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    public function bid(){
+        return $this->hasMany('App\Bid');
+    }
 }

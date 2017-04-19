@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Homepage')
 @section('sidebar')
-    @include('creator.sidebar')
+    @include('bidder.sidebar')
 @endsection
 @section('navigation')
     @include('layouts.navigation')
@@ -28,7 +28,6 @@
                                     <th>Estimated Cost</th>
                                     <th>Date for Tender</th>
                                     <th>Bid Opening Date</th>
-                                    <th>Action</th>
                                     <th>Status</th>
                                 </tr>
                                 </thead>
@@ -42,20 +41,10 @@
                                         <td>{{ $app->date_for_tender }}</td>
                                         <td>{{ $app->bid_opening_date }}</td>
                                         <td>
-                                            <div class="p-b"  style="padding-bottom: 5px;">
-                                                <a href="{{ route('creator.edit.app', ['id'=>$app->id]) }}"><button class="btn btn-default">Edit</button></a>
-                                            </div>
-                                            <a href="{{ route('creator.delete.app', ['id'=>$app->id]) }}" onclick="return confirm('Are you sure you want to delete this mpp?');"><button class="btn btn-danger">Delete</button></a>
+                                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#view-{{ $app->id }}">View</a>
+                                            <a href="" class="btn btn-default" data-toggle="modal" data-target="#bid">BID</a>
                                         </td>
-                                        @if($app->status == 0)
-                                            <td><a href="" class="btn btn-primary" data-toggle="modal" data-target="#view-{{ $app->id }}">Send for Review</a></td>
-                                        @elseif($app->status == 1)
-                                            <td style="color: red;";>Approval Pending</td>
-                                        @elseif($app->status == 3)
-                                            <td style="color: red;";>Approval Pending</td>
-                                        @elseif($app->status == 2)
-                                            <td style="color: green;";>Approved</td>
-                                        @endif
+
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -199,9 +188,38 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <a href="{{ route('creator.review.app', ['id'=>$app->id]) }}"><button class="btn btn-info btn-fill">Send for Review</button></a>
+                    <a href="" class="btn btn-primary">BID</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+
+@foreach($apps as $app)
+    {{-- BID --}}
+    <div class="modal fade bs-example-modal-lg" id="bid" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">BID</h4>
+                </div>
+                <form method="POST" action="{{ route('bidder.app.bid', ['app'=>$app->id]) }}">
+                    <div class="modal-body">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="fiscal_year">
+                                Name
+                            </label>
+                            <input type="text" name="name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

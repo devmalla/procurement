@@ -50,7 +50,7 @@ class ReviewerController extends Controller
     }
     //  Send for approval MPP
     public function getApproveApp($id){
-        $app = Mpp::find($id);
+        $app = App::find($id);
         $app->status = 3;
         $app->update();
         return redirect('reviewer/view/app');

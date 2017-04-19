@@ -9,12 +9,16 @@
             </button>
         </div>
         <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                    <a>Welcome, {{ Sentinel::getUser()->first_name }}</a>
+                </li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="{{ route('logout') }}">
                         Log out
                     </a>
-
                 </li>
             </ul>
         </div>

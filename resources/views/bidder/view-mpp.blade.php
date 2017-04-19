@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Homepage')
 @section('sidebar')
-    @include('reviewer.sidebar')
+    @include('bidder.sidebar')
 @endsection
 @section('navigation')
     @include('layouts.navigation')
@@ -19,12 +19,11 @@
                     </div>
                     <div class="card">
                         <div class="content">
-                            <table class="table table-striped">
+                            <table class="table table-bordered table-striped text-center">
                                 <thead>
                                 <tr>
                                     <th>Project Name</th>
                                     <th>Fiscal Year</th>
-                                    <th>Budget Sub Head No</th>
                                     <th>Procurement Category</th>
                                     <th>Contract Type</th>
                                     <th>Duration</th>
@@ -36,17 +35,13 @@
                                     <tr>
                                         <td>{{ $mpp->project_name }}</td>
                                         <td>{{ $mpp->fiscal_year }}</td>
-                                        <td>{{ $mpp->budget_sub_head_no }}</td>
                                         <td>{{ $mpp->procurement_category }}</td>
                                         <td>{{ $mpp->contract_type }}</td>
                                         <td>{{ $mpp->duration }}</td>
-                                        @if($mpp->status == 1)
-                                            <td>
-                                                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#view-{{ $mpp->id }}">Review</a>
-                                            </td>
-                                        @elseif($mpp->status == 3)
-                                            <td style="color: red;">Approval Pending</td>
-                                        @endif
+                                        <td>
+                                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#view-{{ $mpp->id }}">View</a>
+                                            <a href="" class="btn btn-default" data-toggle="modal" data-target="#bid-{{ $mpp->id }}">BID</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -62,7 +57,7 @@
     @include('layouts.footer')
 @endsection
 @foreach($mpps as $mpp)
-    <!-- Modal -->
+<!-- Modal -->
     <div class="modal fade bs-example-modal-lg" id="view-{{ $mpp->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -133,11 +128,39 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <a href="{{ route('reviewer.decline.mpp', ['id'=>$mpp->id]) }}"><button class="btn btn-danger btn-fill">Decline</button></a>
-                <a href="{{ route('reviewer.approve.mpp', ['id'=>$mpp->id]) }}"><button class="btn btn-info btn-fill">Send for Approval</button></a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
 @endforeach
+
+@foreach($mpps as $mpp)
+    {{-- BID --}}
+    <div class="modal fade bs-example-modal-lg" id="bid-{{ $mpp->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">BID</h4>
+                </div>
+                <form method="POST" action="{{ route('bidder.mpp.bid', ['mpp'=>$mpp->id]) }}">
+                    <div class="modal-body">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <label for="fiscal_year">
+                                    Name
+                                </label>
+                                <input type="text" name="name" class="form-control">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endforeach
+

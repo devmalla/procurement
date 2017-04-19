@@ -98,13 +98,13 @@ class MigrationCartalystSentinel extends Migration
             $table->integer('admin_id')->unsigned()->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
+            $table->string('organization')->nullable();
             $table->string('email');
             $table->string('password');
             $table->string('designation')->nullable();
             $table->string('officer_class')->nullable();
-            $table->integer('contact_one')->nullable();
-            $table->integer('contact_two')->nullable();
-
+            $table->string('contact_one')->nullable();
+            $table->string('contact_two')->nullable();
             $table->text('permissions')->nullable();
             $table->timestamp('last_login')->nullable();
             $table->timestamps();
@@ -129,8 +129,8 @@ class MigrationCartalystSentinel extends Migration
             $table->string('district')->nullable();
             $table->string('municipality')->nullable();
             $table->string('vdc')->nullable();
-            $table->unsignedInteger('contact_one')->nullable();
-            $table->unsignedInteger('contact_two')->nullable();
+            $table->string('contact_one')->nullable();
+            $table->string('contact_two')->nullable();
             $table->timestamps();
         });
 
@@ -172,6 +172,15 @@ class MigrationCartalystSentinel extends Migration
             $table->timestamps();
         });
 
+        Schema::create('bids', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('mpp_id')->unsigned();
+            $table->integer('app_id')->unsigned();
+            $table->string('name');
+            $table->timestamps();
+        });
+
     }
 
     /**
@@ -191,5 +200,6 @@ class MigrationCartalystSentinel extends Migration
         Schema::drop('organizations');
         Schema::drop('mpps');
         Schema::drop('apps');
+        Schema::drop('bids');
     }
 }

@@ -54,7 +54,7 @@
                                     <label for="description">
                                         Description
                                     </label>
-                                    <textarea class="form-control" rows="7">Description</textarea>
+                                    <textarea class="form-control" name="description" rows="7">Description</textarea>
                                 </div>
 
                                 <div class="form-group">

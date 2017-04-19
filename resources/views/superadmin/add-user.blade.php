@@ -40,6 +40,17 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="organization">
+                                        Organization
+                                    </label>
+                                    <select class="form-control" name="organization">
+                                        @foreach($organizations as $organization)
+                                            <option value="{{ $organization->name }}">{{ $organization->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="email">
                                         Email
                                     </label>

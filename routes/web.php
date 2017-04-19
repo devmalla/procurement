@@ -21,6 +21,8 @@ Route::post('/', 'LoginController@postLogin')->name('login');
 Route::get('/logout', 'LoginController@logout')->name('logout');
 
 // Super Admin Routes
+Route::get('admin/register', 'RegistrationController@getAdminRegister')->name('admin.register');
+Route::post('admin/register', 'RegistrationController@postAdminRegister')->name('admin.register');
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/dashboard', 'SuperAdminController@index')->name('admin.dashboard');
     // Organization
@@ -31,6 +33,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/user', 'SuperAdminController@getAddUser')->name('admin.add.user');
     Route::post('/user', 'SuperAdminController@postAddUser')->name('admin.add.user');
     Route::get('view/user', 'SuperAdminController@getViewUser')->name('admin.view.user');
+    //  Bid
+    Route::get('view/bid', 'SuperAdminController@getViewBid')->name('admin.view.bid');
 });
 // Creator Routes
 Route::group(['prefix' => 'creator', 'middleware' => 'creator'], function () {
@@ -89,6 +93,18 @@ Route::group(['prefix' => 'approver', 'middleware' => 'approver'], function () {
 // Bidder Routes
 Route::group(['prefix' => 'bidder', 'middleware' => 'bidder'], function () {
     Route::get('/dashboard', 'BidderController@index')->name('bidder.dashboard');
+    //    MPP
+    Route::get('view/mpp', 'BidderController@getViewMpp')->name('bidder.view.mpp');
+//    Route::get('view/mpp/bid', 'BidderController@getViewMpp')->name('bidder.view.mpp.bid');
+    //    APP
+    Route::get('view/app', 'BidderController@getViewApp')->name('bidder.view.app');
+//    Route::get('view/app/bid', 'BidderController@getViewApp')->name('bidder.view.app.bid');
+    //  MPP BID
+    Route::post('view/mpp/{mpp}', 'BidderController@postMppBid')->name('bidder.mpp.bid');
+    //  APP BID
+    Route::post('view/app/{app}', 'BidderController@postAppBid')->name('bidder.app.bid');
+    //  Bids
+    Route::get('view/bid', 'BidderController@getViewBid')->name('bidder.view.bid');
 });
 
 

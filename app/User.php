@@ -16,6 +16,7 @@ class User extends EloquentUser
      */
     protected $fillable = [
         'email',
+        'organization',
         'admin_id',
         'first_name',
         'last_name',
@@ -29,6 +30,19 @@ class User extends EloquentUser
     public function organization(){
         return $this->hasMany('App\Organization');
     }
+
+    public function bid(){
+        return $this->hasMany('App\Bid');
+    }
+
+    public function mpp(){
+        return $this->hasMany('App\Mpp');
+    }
+
+    public function app(){
+        return $this->hasMany('App\App');
+    }
+
 
     /**
      * The attributes that should be hidden for arrays.

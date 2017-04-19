@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Organization;
+use App\Bid;
 use Sentinel;
 
 
@@ -53,7 +54,9 @@ class SuperAdminController extends Controller
 
     //    User
     public function getAddUser(){
-        return view('superadmin.add-user');
+        $user_id = Sentinel::getUser()->id;
+        $organizations = Organization::where('user_id',$user_id)->get();
+        return view('superadmin.add-user')->with('organizations',$organizations);
     }
 
     public function postAddUser(Request $request)
@@ -91,4 +94,9 @@ class SuperAdminController extends Controller
         return view('superadmin.view-user')->with('users', $users);
     }
 
+    //  View Bids
+    public function getViewBid(){
+        $bids =  Bid::all();
+        return view('superadmin.view-bid')->with('bids', $bids);
+    }
 }
